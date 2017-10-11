@@ -1,0 +1,12 @@
+footer {
+    background-color: cornsilk;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
+
+icon {
+    color: #fff;
+    margin-left: 20px;
+}
