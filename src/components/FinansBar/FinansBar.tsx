@@ -28,28 +28,50 @@ class FinansBar extends Component<MyProps, MyState> {
         super(props);
         this.state = {
             data: {amount: 10000, startValue: 1000, endValue: 30000, stepValue: 500, startstep: 6000, minPeriode: 12, maxPeriode: 36, periodeStep: 1, periodeStart: 24},
-            payEachMonth : 535,
+            payEachMonth : 498,
             value: "",
             valnumber: 10
         };
         //have to bind, get error when using arrow function like the click
         this.amountSlider = this.amountSlider.bind(this);
         this.periodeSlider = this.periodeSlider.bind(this);
-        this.calculatePayEachMonth = this.calculatePayEachMonth.bind(this);
+
     }
+
+    private localPayEachMonth;
+
     amountSlider(event) {
         this.state.data.amount = event.target.value;
         this.calculatePayEachMonth(event.target.value, this.state.data.periodeStart);
     }
     periodeSlider(event){
         this.state.data.periodeStart = event.target.value;
+        this.localPayEachMonth = (this.state.data.amount, event.target.value);
         this.calculatePayEachMonth(this.state.data.amount, event.target.value);
     }
     calculatePayEachMonth = (amount, month) => {
-        const rate = 0.021;
-        let payEachMonthf = Math.round(amount *(rate/(1-(Math.pow(1+rate,-month)))));
-        this.setState({payEachMonth: payEachMonthf})
+        const rate = (9.90/12)/100;
+        let startFee = 800;
+        let monthlyFee = 25;
+        let payEachMonthf = Math.round((amount + startFee) *(rate/(1-(Math.pow(1+rate,-month)))));
+        this.calsomething();
+        this.setState({payEachMonth: payEachMonthf + monthlyFee})
     };
+
+    calsomething = () => {
+
+        const rate = (1+(0.0990/12));
+        console.log(rate);
+
+        console.log(Math.pow(1.2119,1/3))
+
+
+
+
+
+
+};
+
     render() {
         return (
             <div className="loanbar col-lg-2">
@@ -103,7 +125,7 @@ class FinansBar extends Component<MyProps, MyState> {
                 </div>
                 <div>
                     <p>Betal kun {this.state.payEachMonth}.kr hver måned i de næste {this.state.data.periodeStart} måneder, lån {this.state.data.amount}.kr, og udlev dine drømme</p>
-                    <p>åop</p>
+                    <p>Den årlige rente er kun 9,90% , årlige omkostninger i procent ÅOP er ().kr det samlede tilbagebetalingbeløb for perioden er ().kr. Beløbet tillægges et oprettelsesgebyr på 800.kr</p>
                 </div>
             </div>
         )

@@ -10,20 +10,27 @@ class FinansBar extends react_1.Component {
     constructor(props) {
         super(props);
         this.calculatePayEachMonth = (amount, month) => {
-            const rate = 0.021;
-            let payEachMonthf = Math.round(amount * (rate / (1 - (Math.pow(1 + rate, -month)))));
-            this.setState({ payEachMonth: payEachMonthf });
+            const rate = (9.90 / 12) / 100;
+            let startFee = 800;
+            let monthlyFee = 25;
+            let payEachMonthf = Math.round((amount + startFee) * (rate / (1 - (Math.pow(1 + rate, -month)))));
+            this.calsomething();
+            this.setState({ payEachMonth: payEachMonthf + monthlyFee });
+        };
+        this.calsomething = () => {
+            const rate = (1 + (0.0990 / 12));
+            console.log(rate);
+            console.log(Math.pow(1.2119, 1 / 3));
         };
         this.state = {
             data: { amount: 10000, startValue: 1000, endValue: 30000, stepValue: 500, startstep: 6000, minPeriode: 12, maxPeriode: 36, periodeStep: 1, periodeStart: 24 },
-            payEachMonth: 535,
+            payEachMonth: 498,
             value: "",
             valnumber: 10
         };
         //have to bind, get error when using arrow function like the click
         this.amountSlider = this.amountSlider.bind(this);
         this.periodeSlider = this.periodeSlider.bind(this);
-        this.calculatePayEachMonth = this.calculatePayEachMonth.bind(this);
     }
     amountSlider(event) {
         this.state.data.amount = event.target.value;
@@ -31,6 +38,7 @@ class FinansBar extends react_1.Component {
     }
     periodeSlider(event) {
         this.state.data.periodeStart = event.target.value;
+        this.localPayEachMonth = (this.state.data.amount, event.target.value);
         this.calculatePayEachMonth(this.state.data.amount, event.target.value);
     }
     render() {
@@ -74,7 +82,7 @@ class FinansBar extends react_1.Component {
                     " m\u00E5neder, l\u00E5n ",
                     this.state.data.amount,
                     ".kr, og udlev dine dr\u00F8mme"),
-                React.createElement("p", null, "\u00E5op"))));
+                React.createElement("p", null, "Den \u00E5rlige rente er kun 9,90% , \u00E5rlige omkostninger i procent \u00C5OP er ().kr det samlede tilbagebetalingbel\u00F8b for perioden er ().kr. Bel\u00F8bet till\u00E6gges et oprettelsesgebyr p\u00E5 800.kr"))));
     }
 }
 exports.default = FinansBar;
