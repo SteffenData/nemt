@@ -1,0 +1,23 @@
+
+.loanvaluecontainer {
+    max-width: 250px;
+}
+
+.startvalue{
+    float: left;
+    position: relative;
+    left: -60px;
+
+}
+
+.endvalue {
+    float: right;
+    width: calc(100% - 195px);
+}
+
+
+.textCenter {
+    font-size: 120%;
+    font-family: "Arial";
+    font-weight: bold;
+}

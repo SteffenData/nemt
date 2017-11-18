@@ -1,10 +1,12 @@
+
+
 module.exports = {
     entry: "./src/index.tsx",
     devtool: "source-map",
     output: {
 
         path: __dirname + "/dist",
-        publicPath: "/dist/",
+        publicPath: "/dist",
         filename: "bundle.js"
     },
 
@@ -32,8 +34,11 @@ module.exports = {
             { test: /\.less$/, loader: "style!css!autoprefixer!less" },
             { test: /\.scss$/, loader: "style!css" },
 
-        ],
 
+        ],
+    },
+    devServer: {
+        historyApiFallback: true,
     },
 
     // When importing a module whose path matches one of the following, just
